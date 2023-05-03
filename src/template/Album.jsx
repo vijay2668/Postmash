@@ -36,28 +36,34 @@ export default function Album(card) {
   const [navigate, setNavigate] = useState('');
 
 useEffect(() => {
-  const getDatas = async ()=>{
-    if(Object.entries(card)[0][1]?.Posts?.length > 0){
-      setCards(Object.entries(card)[0][1]?.Posts);
-    } else{
-      setCards(undefined);
-    }
-  
-    if(currentUser){
-        const docRef = await doc(db, "users", currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setUserName(docSnap?.data()?.firstName);
-        } else {
-          console.log("No such document!");
+  const getDatas = ()=>{
+    if(card){
+      if(Object.entries(card)[0][1]?.Posts?.length > 0){
+        setCards(Object.entries(card)[0][1]?.Posts);
+      } else{
+        setCards(undefined);
       }
-    }
+    }   
   }
   
-  return () => {
     getDatas();
+}, [card])
+
+useEffect(()=>{
+const get = async () => {
+    if(currentUser){
+      const docRef = doc(db, "users", currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserName(docSnap?.data()?.firstName);
+      } else {
+        console.log("No such document!");
+    }
   }
-}, [card, currentUser])
+}
+
+get();
+},[currentUser])
 
 
 const handleSubmit = ()=>{
@@ -259,6 +265,7 @@ function srcset(image, size, rows = 1, cols = 1) {
   };
 }
 
+if(card){
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -390,4 +397,5 @@ function srcset(image, size, rows = 1, cols = 1) {
       </Modal>
     </ThemeProvider>
   );
+}
 }
