@@ -201,7 +201,7 @@ const [my, setMy] = useState(true);
 const myPosts = ()=>{
   if(currentUser){
     if(my){
-        (Object.entries(datas)[0][1]?.userP?.length > 0)?setCards(Object.entries(datas)[0][1]?.userP): setCards(undefined)
+        (datas && Object.entries(datas)[0][1]?.userP?.length > 0) ? setCards(Object.entries(datas)[0][1]?.userP) : setCards(undefined)
         setMy(false);
         }else{
           (Object.entries(card)[0][1]?.Posts?.length > 0)?setCards(Object.entries(card)[0][1]?.Posts):setCards(undefined)
