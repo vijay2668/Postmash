@@ -184,7 +184,7 @@ useEffect(()=>{
     
   }
   getDatass()
-},[currentUser?.uid, data])
+},[currentUser, data])
 
 
 // console.log(datas)
