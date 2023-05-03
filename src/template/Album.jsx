@@ -57,7 +57,7 @@ useEffect(() => {
   return () => {
     getDatas();
   }
-}, [card, (currentUser)? currentUser : undefined])
+}, [card, currentUser])
 
 
 const handleSubmit = ()=>{
@@ -184,7 +184,7 @@ useEffect(()=>{
     
   }
   getDatass()
-},[(currentUser)? currentUser.uid : undefined, data])
+},[currentUser.uid, data])
 
 
 // console.log(datas)
