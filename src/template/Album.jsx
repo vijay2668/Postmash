@@ -176,7 +176,7 @@ useEffect(()=>{
       cars?.push(doc?.data())
       setData(cars);
       data?.forEach((post)=>{
-        if(Object.keys(post)[0] === currentUser?.uid){
+        if(currentUser && Object.keys(post)[0] === currentUser?.uid){
           setDatas(post)
         }
       });
@@ -184,7 +184,7 @@ useEffect(()=>{
     
   }
   getDatass()
-},[currentUser.uid, data])
+},[currentUser?.uid, data])
 
 
 // console.log(datas)
