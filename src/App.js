@@ -9,13 +9,11 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase';
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
     // im getting globally uploaded posts
-    const [datas, setDatas] = useState([])
+    const [datas, setDatas] = useState("")
 useEffect(()=>{
     try {
       const getDatas = async () => {
-        setLoading(true); setTimeout(() => { setLoading(false); }, 3000);
         const docRef = collection(
           db,
          "Posts"
@@ -23,7 +21,7 @@ useEffect(()=>{
   
         const querySnapshot  = await getDocs(docRef);
         
-        await querySnapshot.forEach((doc) => {
+         querySnapshot.forEach((doc) => {
           if ( doc.exists()) {
             setDatas( doc.data());
             setDatas(() => ({ ...doc.data() }));
@@ -43,7 +41,7 @@ useEffect(()=>{
           <Route
             index
             element={
-              loading? <div className='body'> <div class="loader">
+              !datas? <div className='body'> <div class="loader">
               <span></span>
               <span></span>
               <span></span>
@@ -51,7 +49,7 @@ useEffect(()=>{
               <span></span>
               <span></span>
               <span></span>
-            </div></div> : datas && <Album  value={datas}/>
+            </div></div> : <Album  value={datas}/>
             }
           />
           <Route path="login" element={<SignIn />} />
