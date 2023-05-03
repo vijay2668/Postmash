@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
@@ -33,7 +34,7 @@ export default function Album(card) {
   const [cards , setCards] = useState(undefined);
   const [userName , setUserName] = useState('');
   const {currentUser} = useContext(AuthContext);
-  const [navigate, setNavigate] = useState('');
+  const navigate = useNavigate();
 
 useEffect(() => {
   const getDatas = ()=>{
@@ -69,9 +70,9 @@ get();
 const handleSubmit = ()=>{
   if(currentUser){
     signOut(auth);
-    setNavigate('/');
+    navigate('/');
   } else {
-    setNavigate('/register');
+    navigate('/register');
   }
 };
 
@@ -319,7 +320,7 @@ if(card){
             </Box>
               <Box sx={{ '& > :not(style)': { m: 0 , width:"10rem" , borderRadius:"5rem", gap:"1rem"} }}>
                 <Fab color="primary" aria-label="edit">
-                  <Link onClick={handleSubmit} style={{textDecoration:'none', width:"10rem", color:'white', padding:'1rem'}} href={navigate}>{(currentUser)? 'sign out' : 'register'}</Link>
+                  <Link onClick={handleSubmit} style={{textDecoration:'none', width:"10rem", color:'white', padding:'1rem'}} >{(currentUser)? 'sign out' : 'register'}</Link>
                 </Fab>
             </Box>
             </Stack>
