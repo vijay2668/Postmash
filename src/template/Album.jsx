@@ -37,7 +37,7 @@ export default function Album(card) {
 
 useEffect(() => {
   const getDatas = async ()=>{
-    if(Object.entries(card)[0][1].Posts.length > 0){
+    if(Object.entries(card)[0][1]?.Posts?.length > 0){
       setCards(Object.entries(card)[0][1]?.Posts);
     } else{
       setCards(undefined);
