@@ -70,6 +70,7 @@ get();
 const handleSubmit = ()=>{
   if(currentUser){
     signOut(auth);
+    window.location.reload();
     navigate('/');
   } else {
     navigate('/register');
